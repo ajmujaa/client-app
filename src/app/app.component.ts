@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  client: any;
+
+  selectedClient(event) {
+    this.client = event;
+  }
 }
