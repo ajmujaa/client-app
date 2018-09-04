@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, DoCheck } from '@angular/core';
 import { ServerService } from '../shared/services/server.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ServerService } from '../shared/services/server.service';
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.css']
 })
-export class ClientListComponent implements OnInit {
+export class ClientListComponent implements OnInit, DoCheck {
   clients: any;
   @Output() selectedClient = new EventEmitter<any>();
 
@@ -14,6 +14,10 @@ export class ClientListComponent implements OnInit {
 
   ngOnInit() {
     this.getClients();
+  }
+
+  ngDoCheck() {
+    // this.getClients();
   }
 
   getClients() {

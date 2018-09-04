@@ -12,11 +12,11 @@ export class ServerService {
   constructor(private http: Http) { }
 
   addClient(client: ClientForm) {
-    return this.http.post(AppConstants.DB + 'data.json', client);
+    return this.http.post(AppConstants.DB, client);
   }
 
   getClients() {
-    return this.http.get(AppConstants.DB + 'data.json')
+    return this.http.get(AppConstants.DB)
       .map(
         (response: Response) => {
           const data = response.json();
@@ -31,20 +31,16 @@ export class ServerService {
   }
 
   updateClient(client: any) {
-    const url = AppConstants.DB + '/data.json';
-    console.log(url);
-    return this.http.put(url, client)
-      .map(
-        (response: Response) => {
-          const data = response.json();
-          return data;
-        }
-      )
-      .catch(
-        (error: Response) => { console.log('error', error);
-          return Observable.throw(error);
-        }
-      );
+    return this.http
+      .put(AppConstants.DB, client)
+      .map((response: Response) => {
+        const data = response.json();
+        return data;
+      })
+      .catch((error: Response) => {
+        console.log('error', error);
+        return Observable.throw(error);
+      });
   }
 
 }
